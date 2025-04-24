@@ -171,8 +171,8 @@ export default function Resume() {
 
           <div className="mt-16 text-center">
             <a
-              href="/Angelina-Aziz-CV.pdf"
-              download="Angelina-Aziz-CV.pdf"
+              href="/angelina-aziz.pdf"
+              download="angelina-aziz.pdf"
               className="inline-flex items-center px-10 py-4 border border-transparent text-sm uppercase tracking-wider font-medium rounded-full text-white bg-purple-600 hover:bg-purple-700 transition-all duration-300 shadow-purple hover:-translate-y-1 group"
             >
               <span className="group-hover:mr-1 transition-all duration-300">Download Full Resume</span>
