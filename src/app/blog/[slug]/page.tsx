@@ -11,9 +11,9 @@ export async function generateStaticParams() {
 }
 
 type Props = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
 // Custom MDX components with perfect spacing
@@ -132,7 +132,7 @@ const components = {
 };
 
 export default async function BlogPostPage({ params }: Props) {
-  const { slug } = params;
+  const { slug } = await params;
   const blogDir = path.join(process.cwd(), 'src/app/blog');
   const filePath = path.join(blogDir, `${slug}.mdx`);
   
