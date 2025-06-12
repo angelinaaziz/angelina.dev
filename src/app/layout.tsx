@@ -1,34 +1,89 @@
 import type { Metadata } from "next";
-import { Montserrat, Plus_Jakarta_Sans } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
+import Navigation from "@/components/Navigation";
 
-const montserrat = Montserrat({ 
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  variable: "--font-montserrat" 
-});
-
-const jakarta = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-jakarta"
-});
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Angelina | DevOps Engineer",
-  description: "Personal portfolio of Angelina, a Senior DevOps Engineer",
+  title: {
+    default: "Angelina Aziz - Platform Engineer & Builder",
+    template: "%s | Angelina Aziz"
+  },
+  description: "Platform Engineer & Builder passionate about creating scalable solutions, developer tools, and cloud architecture. Building platforms that empower teams to ship faster and more reliably.",
+  keywords: [
+    "Platform Engineer",
+    "DevOps Engineer", 
+    "Cloud Architecture",
+    "Full-Stack Developer",
+    "AWS",
+    "Azure",
+    "Kubernetes",
+    "Docker",
+    "CI/CD",
+    "Infrastructure as Code",
+    "Developer Tools",
+    "Software Engineering",
+    "Tech Blog",
+    "Angelina Aziz"
+  ],
+  authors: [{ name: "Angelina Aziz", url: "https://angelina.dev" }],
+  creator: "Angelina Aziz",
+  publisher: "Angelina Aziz",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  metadataBase: new URL("https://angelina.dev"),
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://angelina.dev",
+    title: "Angelina Aziz - Platform Engineer & Builder",
+    description: "Platform Engineer & Builder passionate about creating scalable solutions, developer tools, and cloud architecture. Building platforms that empower teams to ship faster and more reliably.",
+    siteName: "Angelina Aziz",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Angelina Aziz - Platform Engineer & Builder",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Angelina Aziz - Platform Engineer & Builder",
+    description: "Platform Engineer & Builder passionate about creating scalable solutions, developer tools, and cloud architecture.",
+    creator: "@angelinxaziz",
+    images: ["/og-image.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+  },
+  manifest: "/site.webmanifest",
+  verification: {
+    google: "your-google-verification-code", // Replace with actual verification code
+  },
 };
-
-const socialLinks = [
-  { href: 'https://www.linkedin.com/in/angelina-aziz-8088051a7/', label: 'LinkedIn', external: true },
-  { href: 'https://twitter.com/angelinxaziz', label: 'Twitter', external: true },
-  { href: 'https://angelinaaziz.substack.com', label: 'Blog', external: true },
-];
-
-const navLinks = [
-  { href: '/projects', label: 'Projects' },
-  { href: '/resume', label: 'Resume' },
-];
 
 export default function RootLayout({
   children,
@@ -36,50 +91,17 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${montserrat.variable} ${jakarta.variable}`}>
-      <body className="min-h-screen bg-light antialiased font-sans">
-        <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-md z-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between h-20">
-              <div className="flex items-center">
-                <a 
-                  href="/" 
-                  className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 via-accent-pink to-purple-500 hover:opacity-80 transition-opacity"
-                >
-                  angelina.dev
-                </a>
-              </div>
-              <div className="flex items-center">
-                <div className="hidden md:flex space-x-1">
-                  {navLinks.map((link) => (
-                    <a
-                      key={link.href}
-                      href={link.href}
-                      className="px-4 py-2 mx-1 rounded-full text-white bg-purple-600 hover:bg-purple-700 transition-all duration-200 text-sm font-medium"
-                    >
-                      {link.label}
-                    </a>
-                  ))}
-                  
-                  {socialLinks.map((link) => (
-                    <a
-                      key={link.href}
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-4 py-2 mx-1 rounded-full text-purple-700 hover:text-purple-800 hover:bg-purple-50 transition-all duration-200 text-sm font-medium"
-                    >
-                      {link.label}
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </nav>
-        <main className="pt-24">
-          {children}
-        </main>
+    <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <meta name="theme-color" content="#8b5cf6" />
+        <meta name="msapplication-TileColor" content="#8b5cf6" />
+        <meta name="msapplication-config" content="/browserconfig.xml" />
+      </head>
+      <body className={inter.className}>
+        <Navigation />
+        {children}
       </body>
     </html>
   );

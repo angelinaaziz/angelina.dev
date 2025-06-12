@@ -1,4 +1,4 @@
-import { FaStar, FaHeart, FaChevronLeft, FaChevronRight, FaGithub, FaLock } from 'react-icons/fa';
+import { FaStar, FaHeart, FaChevronLeft, FaChevronRight, FaGithub, FaLock, FaLockOpen } from 'react-icons/fa';
 import Image from 'next/image';
 import Link from 'next/link';
 import ProjectImageCarousel from '@/components/ProjectImageCarousel';
@@ -35,6 +35,24 @@ export default function Projects() {
         "/images/payday/Screenshot 2025-04-04 at 19.25.54.png"
       ],
       status: "In Development - Awaiting API Approval"
+    },
+    {
+      title: "Becoming: Your Journey, Your NFT",
+      description: "A decentralised application that transforms personal growth into a visual journey through soul-bound NFTs that evolve as you achieve milestones. Becoming NFTs are non-transferable, visually evolve, and create a permanent, verifiable record of your achievements. Built with React, TailwindCSS, Framer Motion, and ink! smart contracts on Polkadot.",
+      tech: ["React", "TailwindCSS", "Framer Motion", "ink!", "Rust", "Polkadot"],
+      link: "https://github.com/angelinaaziz/becoming",
+      codeStatus: "Open Source",
+      emoji: "🦋",
+      status: "Live Demo Available",
+      images: [
+        "/images/becoming/journey-page.png"
+      ],
+      achievements: [
+        "Soul-bound NFT avatars that visually evolve as you add milestones",
+        "Immutable, verifiable achievement records on Polkadot",
+        "Community recognition and tipping system",
+        "Featured demo and technical walkthrough videos"
+      ]
     }
   ]
 
@@ -131,7 +149,12 @@ export default function Projects() {
                         <div
                           className="inline-flex items-center justify-center px-4 py-2 bg-white text-slate-600 rounded-full font-medium border border-slate-200 text-sm tracking-wider"
                         >
-                          <FaLock className="mr-2 text-slate-500" /> {project.codeStatus}
+                          {project.codeStatus === 'Open Source' ? (
+                            <FaLockOpen className="mr-2 text-green-500" />
+                          ) : (
+                            <FaLock className="mr-2 text-slate-500" />
+                          )}
+                          {project.codeStatus}
                         </div>
                       )}
                     </div>
