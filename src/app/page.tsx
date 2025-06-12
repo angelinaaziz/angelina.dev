@@ -245,7 +245,7 @@ export default function Home() {
             <div className="mb-8 inline-block opacity-0 animate-fade-in transition-opacity duration-700" style={{ animationFillMode: 'forwards', animationDelay: "200ms" }}>
               <div className="px-8 py-3 rounded-full bg-gradient-to-r from-purple-100 to-pink-100 text-purple-700 text-sm font-semibold transform hover:scale-110 transition-all duration-300 shadow-lg hover:shadow-purple border border-purple-200/50 backdrop-blur-sm">
                 <span className="mr-2">🚀</span>
-                VC-Backed Founder & Platform Engineer
+                Founder & Platform Engineer
                 <span className="ml-2 animate-bounce-subtle">⚡</span>
               </div>
             </div>
@@ -268,7 +268,7 @@ export default function Home() {
             {/* Enhanced Description */}
             <p className="text-xl sm:text-2xl text-slate-700 mb-12 max-w-4xl mx-auto leading-relaxed opacity-0 animate-fade-in transition-opacity duration-700" style={{ animationFillMode: 'forwards', animationDelay: "600ms" }}>
               As a <span className="font-semibold text-purple-600 relative">
-                VC-backed founder
+                founder
                 <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-purple-400 rounded-full"></span>
               </span>, I build <span className="font-semibold text-pink-600 relative">
                 platforms
