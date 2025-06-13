@@ -4,6 +4,7 @@ import path from 'path';
 import matter from 'gray-matter';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import NewsletterInline from '@/components/NewsletterInline';
+import type { Metadata } from 'next';
 
 // Define types
 type BlogPost = {
@@ -16,7 +17,7 @@ type BlogPost = {
 
 export async function generateStaticParams() {
   try {
-    const blogDir = path.join(process.cwd(), 'src/app/blog');
+    const blogDir = path.join(process.cwd(), 'src', 'app', 'blog');
     const files = fs.readdirSync(blogDir)
       .filter(f => f.endsWith('.mdx'))
       .filter(f => !f.startsWith('page') && !f.startsWith('layout'));
@@ -145,11 +146,10 @@ const components = {
   ),
 };
 
-async function getBlogPost(slug: string): Promise<BlogPost | null> {
+async function getBlogPost(slug: string) {
   try {
     const filePath = path.join(process.cwd(), 'src', 'app', 'blog', `${slug}.mdx`);
     
-    // Check if file exists
     if (!fs.existsSync(filePath)) {
       console.error(`Blog post file not found: ${filePath}`);
       return null;
@@ -182,12 +182,51 @@ type Props = {
   }>;
 };
 
+// Generate metadata for each blog post
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const post = await getBlogPost(slug);
+
+  if (!post) {
+    return {
+      title: 'Post Not Found',
+    };
+  }
+
+  const ogImageUrl = `/og-image?title=${encodeURIComponent(post.title)}&subtitle=${encodeURIComponent(post.description)}&type=blog`;
+
+  return {
+    title: post.title,
+    description: post.description,
+    openGraph: {
+      title: post.title,
+      description: post.description,
+      type: 'article',
+      publishedTime: post.date,
+      authors: ['Angelina Aziz'],
+      images: [
+        {
+          url: ogImageUrl,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.description,
+      images: [ogImageUrl],
+    },
+  };
+}
+
 export const viewport = {
   themeColor: '#7c3aed',
 };
 
 export default async function BlogPostPage({ params }: Props) {
-  // Await the params before using them
   const { slug } = await params;
 
   if (!slug) {

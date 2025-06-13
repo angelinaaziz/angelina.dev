@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     siteName: "Angelina Aziz",
     images: [
       {
-        url: "/og-image.png",
+        url: "/og-image",
         width: 1200,
         height: 630,
         alt: "Angelina Aziz - Platform Engineer & Builder",
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     title: "Angelina Aziz - Platform Engineer & Builder",
     description: "Platform Engineer & Builder passionate about creating scalable solutions, developer tools, and cloud architecture.",
     creator: "@angelinxaziz",
-    images: ["/og-image.png"],
+    images: ["/og-image"],
   },
   robots: {
     index: true,
