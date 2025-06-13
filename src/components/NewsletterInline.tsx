@@ -44,35 +44,35 @@ export default function NewsletterInline() {
   };
 
   return (
-    <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl p-6 border border-purple-100 my-8">
-      <div className="flex items-center justify-between">
-        <div className="flex-1 mr-4">
+    <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-purple-100 my-6 sm:my-8">
+      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
+        <div className="flex-1 lg:mr-4">
           <div className="flex items-center mb-2">
-            <span className="text-xl mr-2">💌</span>
-            <h4 className="text-lg font-semibold text-slate-800">
+            <span className="text-lg sm:text-xl mr-2">💌</span>
+            <h4 className="text-base sm:text-lg font-semibold text-slate-800">
               Enjoyed this post?
             </h4>
           </div>
-          <p className="text-sm text-slate-600">
+          <p className="text-xs sm:text-sm text-slate-600">
             Subscribe to get notified of new posts!
           </p>
         </div>
 
-        <div className="flex-shrink-0 w-80">
-          <form onSubmit={handleSubmit} className="flex gap-2">
+        <div className="w-full lg:w-80 lg:flex-shrink-0">
+          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2 sm:gap-2">
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="your@email.com"
-              className="flex-1 px-3 py-2 text-sm bg-white border border-purple-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent"
+              className="flex-1 px-3 py-2.5 sm:py-2 text-sm bg-white border border-purple-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent"
               disabled={status === 'loading' || status === 'success'}
               required
             />
             <button
               type="submit"
               disabled={status === 'loading' || status === 'success'}
-              className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-300 whitespace-nowrap transform hover:scale-105 active:scale-95 ${
+              className={`px-4 py-2.5 sm:py-2 text-sm font-medium rounded-lg transition-all duration-300 whitespace-nowrap transform hover:scale-105 active:scale-95 ${
                 status === 'success'
                   ? 'bg-green-500 text-white cursor-default hover:scale-100'
                   : status === 'loading'
