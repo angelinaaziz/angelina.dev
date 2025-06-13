@@ -1,20 +1,34 @@
+import { notFound } from 'next/navigation';
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import { notFound } from 'next/navigation';
 import { MDXRemote } from 'next-mdx-remote/rsc';
+import NewsletterInline from '@/components/NewsletterInline';
+
+// Define types
+type BlogPost = {
+  title: string;
+  date: string;
+  description: string;
+  content: string;
+  originallySubstack: boolean | undefined;
+};
 
 export async function generateStaticParams() {
-  const blogDir = path.join(process.cwd(), 'src/app/blog');
-  const files = fs.readdirSync(blogDir).filter(f => f.endsWith('.mdx'));
-  return files.map(filename => ({ slug: filename.replace(/\.mdx$/, '') }));
+  try {
+    const blogDir = path.join(process.cwd(), 'src/app/blog');
+    const files = fs.readdirSync(blogDir)
+      .filter(f => f.endsWith('.mdx'))
+      .filter(f => !f.startsWith('page') && !f.startsWith('layout'));
+    
+    return files.map(filename => ({
+      slug: filename.replace(/\.mdx$/, '')
+    }));
+  } catch (error) {
+    console.error('Error generating static params:', error);
+    return [];
+  }
 }
-
-type Props = {
-  params: Promise<{
-    slug: string;
-  }>;
-};
 
 // Custom MDX components with perfect spacing
 const components = {
@@ -131,17 +145,62 @@ const components = {
   ),
 };
 
+async function getBlogPost(slug: string): Promise<BlogPost | null> {
+  try {
+    const filePath = path.join(process.cwd(), 'src', 'app', 'blog', `${slug}.mdx`);
+    
+    // Check if file exists
+    if (!fs.existsSync(filePath)) {
+      console.error(`Blog post file not found: ${filePath}`);
+      return null;
+    }
+
+    const source = fs.readFileSync(filePath, 'utf8');
+    const { data, content } = matter(source);
+    
+    if (!data.title || !data.date || !data.description) {
+      console.error(`Missing required frontmatter in blog post: ${slug}`);
+      return null;
+    }
+
+    return {
+      title: data.title,
+      date: data.date,
+      description: data.description,
+      content,
+      originallySubstack: data.originallySubstack
+    };
+  } catch (error) {
+    console.error(`Error reading blog post ${slug}:`, error);
+    return null;
+  }
+}
+
+type Props = {
+  params: Promise<{
+    slug: string;
+  }>;
+};
+
+export const viewport = {
+  themeColor: '#7c3aed',
+};
+
 export default async function BlogPostPage({ params }: Props) {
+  // Await the params before using them
   const { slug } = await params;
-  const blogDir = path.join(process.cwd(), 'src/app/blog');
-  const filePath = path.join(blogDir, `${slug}.mdx`);
-  
-  if (!fs.existsSync(filePath)) {
-    return notFound();
+
+  if (!slug) {
+    console.error('No slug provided');
+    notFound();
   }
 
-  const fileContent = fs.readFileSync(filePath, 'utf-8');
-  const { data, content } = matter(fileContent);
+  const post = await getBlogPost(slug);
+
+  if (!post) {
+    console.error(`Blog post not found: ${slug}`);
+    notFound();
+  }
 
   return (
     <div className="min-h-screen bg-white">
@@ -160,14 +219,14 @@ export default async function BlogPostPage({ params }: Props) {
             
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-8 tracking-tight text-slate-800">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-600 via-accent-pink to-accent-peach animate-gradient bg-size-200">
-                {data.title}
+                {post.title}
               </span>
             </h1>
             
             <div className="flex items-center justify-center text-slate-600 space-x-6 text-lg">
-              <time dateTime={data.date} className="flex items-center">
+              <time dateTime={post.date} className="flex items-center">
                 <span className="mr-2">📅</span>
-                {new Date(data.date).toLocaleDateString('en-US', { 
+                {new Date(post.date).toLocaleDateString('en-US', { 
                   year: 'numeric', 
                   month: 'long', 
                   day: 'numeric' 
@@ -187,8 +246,13 @@ export default async function BlogPostPage({ params }: Props) {
       <main className="relative">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 -mt-16">
           <article className="max-w-3xl mx-auto">
-            <MDXRemote source={content} components={components} />
+            <MDXRemote source={post.content} components={components} />
           </article>
+
+          {/* Newsletter */}
+          <div className="max-w-3xl mx-auto mt-20">
+            <NewsletterInline />
+          </div>
 
           {/* Footer */}
           <footer className="max-w-3xl mx-auto mt-20 pt-12 border-t border-gradient-to-r from-transparent via-purple-200 to-transparent relative">
@@ -198,7 +262,7 @@ export default async function BlogPostPage({ params }: Props) {
               </div>
             </div>
             <div className="text-center">
-              {data.originallySubstack !== false && (
+              {post.originallySubstack !== false && (
                 <p className="text-slate-500 text-lg mb-4">Originally published on Substack, now hosted on my own site.</p>
               )}
               <div className="flex justify-center space-x-6 text-sm text-slate-400">

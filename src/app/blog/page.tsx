@@ -2,34 +2,57 @@ import fs from 'fs';
 import path from 'path';
 import Link from 'next/link';
 import matter from 'gray-matter';
+import NewsletterSubscribe from '@/components/NewsletterSubscribe';
 
-export default function BlogIndex() {
-  // Read all MDX files in the blog directory
-  const blogDir = path.join(process.cwd(), 'src/app/blog');
-  const files = fs.readdirSync(blogDir).filter(f => f.endsWith('.mdx'));
-  const posts = files.map(filename => {
-    const filePath = path.join(blogDir, filename);
-    const fileContent = fs.readFileSync(filePath, 'utf-8');
-    const { data, content } = matter(fileContent);
-    
-    // Better excerpt extraction - get first paragraph after frontmatter
-    const contentLines = content.split('\n').filter(line => line.trim() !== '');
-    let excerpt = '';
-    for (const line of contentLines) {
-      if (!line.startsWith('#') && !line.startsWith('>') && line.length > 50) {
-        excerpt = line.substring(0, 150) + '...';
-        break;
+// Define blog post type
+interface BlogPost {
+  slug: string;
+  title: string;
+  date: string;
+  description: string;
+  excerpt?: string;
+}
+
+async function getBlogPosts(): Promise<BlogPost[]> {
+  try {
+    const blogDir = path.join(process.cwd(), 'src/app/blog');
+    const files = fs.readdirSync(blogDir)
+      .filter(f => f.endsWith('.mdx'))
+      .filter(f => !f.startsWith('page') && !f.startsWith('layout'));
+
+    const posts = files.map(filename => {
+      const filePath = path.join(blogDir, filename);
+      const source = fs.readFileSync(filePath, 'utf8');
+      const { data, content } = matter(source);
+      
+      // Better excerpt extraction - get first paragraph after frontmatter
+      const contentLines = content.split('\n').filter(line => line.trim() !== '');
+      let excerpt = '';
+      for (const line of contentLines) {
+        if (!line.startsWith('#') && !line.startsWith('>') && line.length > 50) {
+          excerpt = line.substring(0, 150) + '...';
+          break;
+        }
       }
-    }
-    
-    return {
-      slug: filename.replace(/\.mdx$/, ''),
-      title: data.title,
-      date: data.date,
-      description: data.description,
-      excerpt: excerpt || data.description
-    };
-  }).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+      
+      return {
+        slug: filename.replace(/\.mdx$/, ''),
+        title: data.title,
+        date: data.date,
+        description: data.description,
+        excerpt: excerpt || data.description,
+      };
+    });
+
+    return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  } catch (error) {
+    console.error('Error reading blog posts:', error);
+    return [];
+  }
+}
+
+export default async function BlogIndex() {
+  const posts = await getBlogPosts();
 
   return (
     <div className="min-h-screen bg-white">
@@ -128,6 +151,11 @@ export default function BlogIndex() {
               <p className="text-slate-600">Check back soon for new content!</p>
             </div>
           )}
+          
+          {/* Newsletter Subscription */}
+          <div className="mt-20">
+            <NewsletterSubscribe />
+          </div>
         </div>
       </main>
     </div>
