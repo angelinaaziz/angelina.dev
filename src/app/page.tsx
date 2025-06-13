@@ -184,6 +184,27 @@ export default function Home() {
       }
     }
 
+    function handleKeyDown(event: KeyboardEvent) {
+      if (!gameActive) return;
+      
+      // Handle tab key
+      if (event.key === 'Tab') {
+        event.preventDefault();
+        const target = event.target as HTMLTextAreaElement;
+        const start = target.selectionStart;
+        const end = target.selectionEnd;
+        
+        // Insert 2 spaces for tab
+        target.value = target.value.substring(0, start) + '  ' + target.value.substring(end);
+        
+        // Move cursor after the 2 spaces
+        target.selectionStart = target.selectionEnd = start + 2;
+        
+        // Trigger the typing handler
+        handleTyping(event as any);
+      }
+    }
+
     // Event listeners
     if (startButton) {
       startButton.addEventListener('click', startGame);
@@ -191,12 +212,14 @@ export default function Home() {
     
     if (typingInput) {
       typingInput.addEventListener('input', handleTyping);
+      typingInput.addEventListener('keydown', handleKeyDown);
     }
 
     // Cleanup function
     return () => {
       if (typingInput) {
         typingInput.removeEventListener('input', handleTyping);
+        typingInput.removeEventListener('keydown', handleKeyDown);
       }
     };
   }, []);
