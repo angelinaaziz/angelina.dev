@@ -25,18 +25,6 @@ export default function Projects() {
       ]
     },
     {
-      title: "When Is Payday?",
-      description: "A modern web application that helps users track and manage their paydays with precise scheduling and calendar integration. Currently awaiting Google Calendar API approval for full launch.",
-      tech: ["Next.js", "TypeScript", "Calendar API", "Tailwind CSS"],
-      link: "https://www.whenispayday.com",
-      codeStatus: "Private Repository",
-      emoji: "💸",
-      images: [
-        "/images/payday/Screenshot 2025-04-04 at 19.25.54.png"
-      ],
-      status: "In Development - Awaiting API Approval"
-    },
-    {
       title: "Becoming: Your Journey, Your NFT",
       description: "A decentralised application that transforms personal growth into a visual journey through soul-bound NFTs that evolve as you achieve milestones. Becoming NFTs are non-transferable, visually evolve, and create a permanent, verifiable record of your achievements. Built with React, TailwindCSS, Framer Motion, and ink! smart contracts on Polkadot.",
       tech: ["React", "TailwindCSS", "Framer Motion", "ink!", "Rust", "Polkadot"],
@@ -53,6 +41,18 @@ export default function Projects() {
         "Community recognition and tipping system",
         "Featured demo and technical walkthrough videos"
       ]
+    },
+    {
+      title: "When Is Payday?",
+      description: "A modern web application that helps users track and manage their paydays with precise scheduling and calendar integration. Currently awaiting Google Calendar API approval for full launch.",
+      tech: ["Next.js", "TypeScript", "Calendar API", "Tailwind CSS"],
+      link: "https://www.whenispayday.com",
+      codeStatus: "Private Repository",
+      emoji: "💸",
+      images: [
+        "/images/payday/Screenshot 2025-04-04 at 19.25.54.png"
+      ],
+      status: "In Development - Awaiting API Approval"
     }
   ]
 
