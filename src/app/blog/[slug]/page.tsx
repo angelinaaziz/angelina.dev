@@ -185,7 +185,7 @@ export default async function BlogPostPage({ params }: Props) {
 
       {/* Main Content */}
       <main className="relative">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 -mt-16">
           <article className="max-w-3xl mx-auto">
             <MDXRemote source={content} components={components} />
           </article>
@@ -198,7 +198,9 @@ export default async function BlogPostPage({ params }: Props) {
               </div>
             </div>
             <div className="text-center">
-              <p className="text-slate-500 text-lg mb-4">Originally published on Substack, now hosted on my own site.</p>
+              {data.originallySubstack !== false && (
+                <p className="text-slate-500 text-lg mb-4">Originally published on Substack, now hosted on my own site.</p>
+              )}
               <div className="flex justify-center space-x-6 text-sm text-slate-400">
                 <span>Made with 💜 by Angelina</span>
                 <span>•</span>

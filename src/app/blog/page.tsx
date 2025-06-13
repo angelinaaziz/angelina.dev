@@ -64,9 +64,10 @@ export default function BlogIndex() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
           <div className="space-y-8">
             {posts.map((post, index) => (
-              <article 
-                key={post.slug} 
-                className="group bg-white rounded-3xl shadow-soft border border-purple-100/50 p-8 hover:shadow-purple transition-all duration-500 hover:-translate-y-1 relative overflow-hidden"
+              <Link 
+                key={post.slug}
+                href={`/blog/${post.slug}`}
+                className="block group bg-white rounded-3xl shadow-soft border border-purple-100/50 p-8 hover:shadow-purple transition-all duration-500 hover:-translate-y-1 relative overflow-hidden cursor-pointer"
                 style={{ 
                   animationDelay: `${index * 100}ms`,
                   opacity: 0,
@@ -94,9 +95,7 @@ export default function BlogIndex() {
                     </div>
                     
                     <h2 className="text-2xl lg:text-3xl font-bold text-slate-800 mb-4 group-hover:text-purple-600 transition-colors duration-300">
-                      <Link href={`/blog/${post.slug}`} className="hover:underline decoration-purple-300 underline-offset-4">
-                        {post.title}
-                      </Link>
+                      {post.title}
                     </h2>
                     
                     <p className="text-lg text-slate-600 mb-4 leading-relaxed">
@@ -109,19 +108,16 @@ export default function BlogIndex() {
                   </div>
                   
                   <div className="lg:ml-8 flex-shrink-0">
-                    <Link 
-                      href={`/blog/${post.slug}`}
-                      className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-600 to-accent-pink text-white rounded-full font-medium hover:shadow-glow transition-all duration-300 hover:-translate-y-1 group/btn"
-                    >
+                    <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-600 to-accent-pink text-white rounded-full font-medium group-hover:shadow-glow transition-all duration-300 group-hover:-translate-y-1 group/btn">
                       <span className="mr-2">Read More</span>
                       <span className="group-hover/btn:translate-x-1 transition-transform duration-300">→</span>
-                    </Link>
+                    </div>
                   </div>
                 </div>
                 
                 {/* Hover effect overlay */}
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-50/0 to-pink-50/0 group-hover:from-purple-50/30 group-hover:to-pink-50/30 transition-all duration-500 rounded-3xl pointer-events-none"></div>
-              </article>
+              </Link>
             ))}
           </div>
           
