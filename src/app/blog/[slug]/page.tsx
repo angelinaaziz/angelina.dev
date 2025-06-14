@@ -3,8 +3,12 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import { MDXRemote } from 'next-mdx-remote/rsc';
+import { Suspense } from 'react';
 import NewsletterInline from '@/components/NewsletterInline';
 import ViewCounter from '@/components/ViewCounter';
+import ReadingProgress from '@/components/ReadingProgress';
+import ScrollToTop from '@/components/ScrollToTop';
+import { calculateReadingTime, formatReadingTime } from '@/utils/readingTime';
 import type { Metadata } from 'next';
 
 // Define types
@@ -242,8 +246,17 @@ export default async function BlogPostPage({ params }: Props) {
     notFound();
   }
 
+  const readingTime = calculateReadingTime(post.content);
+
   return (
     <div className="min-h-screen bg-white">
+      {/* Reading Progress Bar */}
+      <Suspense fallback={null}>
+        <ReadingProgress />
+      </Suspense>
+      
+      {/* Scroll to Top Button */}
+      <ScrollToTop />
       {/* Hero Header */}
       <section className="relative py-12 sm:py-16 lg:py-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-dots bg-dots opacity-50"></div>
@@ -278,6 +291,11 @@ export default async function BlogPostPage({ params }: Props) {
               <span className="flex items-center">
                 <span className="mr-2">✍️</span>
                 Angelina Aziz
+              </span>
+              <span className="text-purple-300 hidden sm:inline">•</span>
+              <span className="flex items-center">
+                <span className="mr-2">⏱️</span>
+                {formatReadingTime(readingTime)}
               </span>
               <span className="text-purple-300 hidden sm:inline">•</span>
               <ViewCounter slug={slug} />

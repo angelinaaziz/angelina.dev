@@ -32,6 +32,7 @@ export default function Projects() {
       codeStatus: "Open Source",
       emoji: "🦋",
       status: "Live Demo Available",
+      isGitHub: true,
       images: [
         "/images/becoming/journey-page.png"
       ],
@@ -57,17 +58,36 @@ export default function Projects() {
   ]
 
   return (
-    <div className="min-h-screen py-20 bg-white">
-      <div className="absolute inset-0 bg-gradient-dots bg-dots opacity-50 pointer-events-none"></div>
-      
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <h1 className="text-4xl sm:text-6xl font-bold text-slate-800 mb-4 text-center">
-          My Projects
-          <span className="inline-block ml-4 text-4xl animate-bounce-subtle">✨</span>
-        </h1>
-        <p className="text-xl text-slate-700 mb-10 text-center max-w-3xl mx-auto">
-          I just like building cool stuff that actually helps people. Here's some of the things I've made that I'm pretty proud of!
-        </p>
+    <div className="min-h-screen bg-white">
+      {/* Hero Section */}
+      <section className="relative py-16 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-dots bg-dots opacity-50"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-purple-50/30 to-white"></div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="text-center mb-8">
+            <div className="mb-6 inline-block">
+              <div className="px-4 py-2 rounded-full bg-purple-100 text-purple-600 text-sm font-medium">
+                🚀 My Work
+              </div>
+            </div>
+            
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 tracking-tight text-slate-800">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-600 via-accent-pink to-accent-peach animate-gradient bg-size-200">
+                Projects & Builds
+              </span>
+            </h1>
+            
+            <p className="text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
+              I just like building cool stuff that actually helps people. Here's some of the things I've made that I'm pretty proud of!
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Projects Section */}
+      <main className="relative pb-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8">
         
         <div className="space-y-16">
           {projects.map((project, index) => (
@@ -124,6 +144,8 @@ export default function Projects() {
                       </div>
                     )}
                     
+
+                    
                     <div className="flex flex-wrap gap-2 mb-6">
                       {project.tech.map((tech, techIndex) => (
                         <span
@@ -142,7 +164,16 @@ export default function Projects() {
                         rel="noopener noreferrer"
                         className="inline-flex items-center justify-center px-5 py-2 bg-purple-600 text-white rounded-full font-medium hover:bg-purple-700 transition-all duration-300 hover:-translate-y-1 shadow-purple text-sm tracking-wider"
                       >
-                        Visit Project <span className="ml-2">→</span>
+                        {project.isGitHub ? (
+                          <>
+                            <FaGithub className="mr-2" />
+                            View on GitHub
+                          </>
+                        ) : (
+                          <>
+                            Visit Project <span className="ml-2">→</span>
+                          </>
+                        )}
                       </a>
                       
                       {project.codeStatus && (
@@ -166,7 +197,8 @@ export default function Projects() {
             </div>
           ))}
         </div>
-      </div>
+        </div>
+      </main>
     </div>
   )
 } 

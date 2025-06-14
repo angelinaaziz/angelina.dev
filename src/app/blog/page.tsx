@@ -5,6 +5,7 @@ import matter from 'gray-matter';
 import { Suspense } from 'react';
 import NewsletterSubscribe from '@/components/NewsletterSubscribe';
 import UnsubscribeMessage from '@/components/UnsubscribeMessage';
+import { calculateReadingTime, formatReadingTime } from '@/utils/readingTime';
 
 // Define blog post type
 interface BlogPost {
@@ -13,6 +14,7 @@ interface BlogPost {
   date: string;
   description: string;
   excerpt?: string;
+  readingTime?: number;
 }
 
 async function getBlogPosts(): Promise<BlogPost[]> {
@@ -37,12 +39,15 @@ async function getBlogPosts(): Promise<BlogPost[]> {
         }
       }
       
+      const readingTime = calculateReadingTime(content);
+      
       return {
         slug: filename.replace(/\.mdx$/, ''),
         title: data.title,
         date: data.date,
         description: data.description,
         excerpt: excerpt || data.description,
+        readingTime,
       };
     });
 
@@ -64,12 +69,12 @@ export default async function BlogIndex() {
         </Suspense>
         
         {/* Hero Section */}
-      <section className="relative py-20 overflow-hidden">
+      <section className="relative py-16 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-dots bg-dots opacity-50"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-purple-50/30 to-white"></div>
         
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="text-center mb-16">
+          <div className="text-center mb-8">
             <div className="mb-6 inline-block">
               <div className="px-4 py-2 rounded-full bg-purple-100 text-purple-600 text-sm font-medium">
                 ✍️ My Blog
@@ -121,7 +126,7 @@ export default async function BlogIndex() {
                         })}
                       </time>
                       <span className="text-purple-300">•</span>
-                      <span className="text-sm text-slate-500">5 min read</span>
+                      <span className="text-sm text-slate-500">{formatReadingTime(post.readingTime || 5)}</span>
                     </div>
                     
                     <h2 className="text-2xl lg:text-3xl font-bold text-slate-800 mb-4 group-hover:text-purple-600 transition-colors duration-300">

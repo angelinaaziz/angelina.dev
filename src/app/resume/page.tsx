@@ -2,14 +2,36 @@ import { FaStar } from 'react-icons/fa';
 
 export default function Resume() {
   return (
-    <div className="min-h-screen py-32 bg-white">
-      <div className="absolute inset-0 bg-gradient-dots bg-dots opacity-50 pointer-events-none"></div>
-      
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div className="bg-white rounded-3xl shadow-soft border border-purple-100 p-10">
-          <div className="text-center mb-16">
-            <h1 className="text-5xl font-bold text-slate-800 mb-4">Angelina Aziz</h1>
-            <p className="text-2xl text-purple-600 mb-6">Senior DevOps Engineer</p>
+    <div className="min-h-screen bg-white">
+      {/* Hero Section */}
+      <section className="relative py-16 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-dots bg-dots opacity-50"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-purple-50/30 to-white"></div>
+        
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="text-center mb-8">
+            <div className="mb-6 inline-block">
+              <div className="px-4 py-2 rounded-full bg-purple-100 text-purple-600 text-sm font-medium">
+                👩‍💻 Professional Profile
+              </div>
+            </div>
+            
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 tracking-tight text-slate-800">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-600 via-accent-pink to-accent-peach animate-gradient bg-size-200">
+                Angelina Aziz
+              </span>
+            </h1>
+            
+            <p className="text-xl sm:text-2xl text-purple-600 mb-6 font-medium">Senior DevOps Engineer</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Resume Content */}
+      <main className="relative pb-20">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8">
+          <div className="bg-white rounded-3xl shadow-soft border border-purple-100 p-8 sm:p-10">
+            <div className="text-center mb-12">
             <div className="flex justify-center space-x-6 text-slate-800">
               <a href="mailto:angelinaaziz1@gmail.com" className="hover:text-purple-600 transition-colors hover:-translate-y-1 transition-transform duration-300 inline-flex">
                 <span className="mr-2">📧</span> Email
@@ -179,8 +201,9 @@ export default function Resume() {
               <span className="inline-block group-hover:translate-x-1 transition-transform duration-300">📄</span>
             </a>
           </div>
+          </div>
         </div>
-      </div>
+      </main>
     </div>
   )
 } 
