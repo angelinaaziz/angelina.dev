@@ -2,7 +2,9 @@ import fs from 'fs';
 import path from 'path';
 import Link from 'next/link';
 import matter from 'gray-matter';
+import { Suspense } from 'react';
 import NewsletterSubscribe from '@/components/NewsletterSubscribe';
+import UnsubscribeMessage from '@/components/UnsubscribeMessage';
 
 // Define blog post type
 interface BlogPost {
@@ -54,9 +56,14 @@ async function getBlogPosts(): Promise<BlogPost[]> {
 export default async function BlogIndex() {
   const posts = await getBlogPosts();
 
-  return (
-    <div className="min-h-screen bg-white">
-      {/* Hero Section */}
+      return (
+      <div className="min-h-screen bg-white">
+        {/* Unsubscribe Message */}
+        <Suspense fallback={null}>
+          <UnsubscribeMessage />
+        </Suspense>
+        
+        {/* Hero Section */}
       <section className="relative py-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-dots bg-dots opacity-50"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-purple-50/30 to-white"></div>
