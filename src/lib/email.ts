@@ -23,6 +23,81 @@ if (!process.env.GMAIL_EMAIL || !process.env.GMAIL_APP_PASSWORD) {
 }
 
 export const emailService = {
+  // Send newsletter email
+  async sendNewsletterEmail(email: string, subject: string, content: string, blogUrl: string): Promise<boolean> {
+    try {
+      const mailOptions = {
+        from: { name: FROM_NAME, address: FROM_EMAIL },
+        to: email,
+        subject,
+        html: `
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <meta charset="utf-8">
+            <title>${subject}</title>
+          </head>
+          <body style="font-family: -apple-system, sans-serif; line-height: 1.5; color: #334155; max-width: 600px; margin: 0 auto; padding: 16px;">
+            <!-- Header -->
+            <div style="background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%); border-radius: 16px 16px 0 0; padding: 32px 24px; text-align: center; margin-bottom: 0;">
+              <div style="font-size: 40px; margin-bottom: 12px;">✨</div>
+              <h1 style="color: white; margin: 0 0 8px 0; font-size: 28px; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                New Blog Post!
+              </h1>
+              <p style="color: rgba(255,255,255,0.9); font-size: 16px; margin: 0; font-weight: 500;">
+                Fresh thoughts from my brain to your inbox
+              </p>
+            </div>
+            
+            <!-- Main Content -->
+            <div style="background: white; padding: 24px; border: 1px solid #f1f5f9; border-top: none; border-radius: 0 0 16px 16px;">
+              <div style="color: #475569; font-size: 15px; line-height: 1.6; margin-bottom: 24px;">
+                ${content}
+              </div>
+              
+              <!-- CTA Button -->
+              <div style="text-align: center; margin: 24px 0 16px;">
+                <a href="${blogUrl}" 
+                   style="display: inline-block; background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%); color: white; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: 600; font-size: 14px; box-shadow: 0 4px 6px rgba(139, 92, 246, 0.2);">
+                  Read the full post →
+                </a>
+              </div>
+            </div>
+            
+            <!-- Footer -->
+            <div style="text-align: center; margin-top: 24px; padding-top: 16px; border-top: 1px solid #e2e8f0;">
+              <p style="color: #64748b; font-size: 13px; margin: 0 0 4px 0;">
+                Made with 💜 by <a href="${SITE_URL}" style="color: #8b5cf6; text-decoration: none; font-weight: 500;">Angelina</a>
+              </p>
+              <p style="color: #94a3b8; font-size: 12px; margin: 8px 0 0;">
+                Changed your mind? <a href="${SITE_URL}/api/newsletter/unsubscribe?email=${encodeURIComponent(email)}" style="color: #8b5cf6; text-decoration: none;">Unsubscribe here</a>
+              </p>
+            </div>
+          </body>
+          </html>
+        `,
+        text: `
+${subject}
+
+${content.replace(/<[^>]*>/g, '')}
+
+Read the full post: ${blogUrl}
+
+Made with 💜 by Angelina
+${SITE_URL}
+
+Changed your mind? Unsubscribe: ${SITE_URL}/api/newsletter/unsubscribe?email=${encodeURIComponent(email)}
+        `,
+      };
+
+      await transporter.sendMail(mailOptions);
+      return true;
+    } catch (error) {
+      console.error('Error sending newsletter email:', error);
+      return false;
+    }
+  },
+
   // Send welcome email
   async sendWelcomeEmail(email: string): Promise<boolean> {
     try {

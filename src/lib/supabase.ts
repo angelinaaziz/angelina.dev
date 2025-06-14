@@ -78,5 +78,21 @@ export const subscriberService = {
       console.error('Error unsubscribing:', error);
       return { success: false, error };
     }
+  },
+
+  // Get all active subscribers
+  async getAllActiveSubscribers(): Promise<{ data: string[] | null; error: any }> {
+    try {
+      const { data, error } = await supabase
+        .from('subscribers')
+        .select('email')
+        .eq('is_active', true);
+
+      if (error) throw error;
+      return { data: data?.map(sub => sub.email) || [], error: null };
+    } catch (error) {
+      console.error('Error getting subscribers:', error);
+      return { data: null, error };
+    }
   }
 }; 
