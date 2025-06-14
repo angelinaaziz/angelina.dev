@@ -95,4 +95,69 @@ export const subscriberService = {
       return { data: null, error };
     }
   }
+};
+
+// Blog views service
+export const viewsService = {
+  // Get view count for a blog post
+  async getViews(slug: string): Promise<{ views: number; error: any }> {
+    try {
+      const { data, error } = await supabase
+        .from('blog_views')
+        .select('views')
+        .eq('slug', slug)
+        .single();
+
+      if (error && error.code !== 'PGRST116') { // PGRST116 is "not found"
+        throw error;
+      }
+
+      return { views: data?.views || 0, error: null };
+    } catch (error) {
+      console.error('Error getting views:', error);
+      return { views: 0, error };
+    }
+  },
+
+  // Increment view count for a blog post
+  async incrementViews(slug: string): Promise<{ views: number; error: any }> {
+    try {
+      // Try using the RPC function first
+      const { data, error } = await supabase.rpc('increment_views', { post_slug: slug });
+
+      if (error) {
+        console.log('RPC function not available, using upsert fallback');
+        // Fallback to upsert if RPC function doesn't exist
+        const { data: existingData } = await supabase
+          .from('blog_views')
+          .select('views')
+          .eq('slug', slug)
+          .single();
+
+        const currentViews = existingData?.views || 0;
+        const newViews = currentViews + 1;
+
+        const { data: upsertData, error: upsertError } = await supabase
+          .from('blog_views')
+          .upsert(
+            { 
+              slug, 
+              views: newViews,
+              updated_at: new Date().toISOString()
+            },
+            { onConflict: 'slug' }
+          )
+          .select('views')
+          .single();
+
+        if (upsertError) throw upsertError;
+        return { views: upsertData?.views || newViews, error: null };
+      }
+
+      return { views: data || 1, error: null };
+    } catch (error) {
+      console.error('Error incrementing views:', error);
+      return { views: 1, error };
+    }
+  }
 }; 

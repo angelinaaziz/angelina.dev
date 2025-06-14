@@ -5,7 +5,9 @@ CREATE TABLE IF NOT EXISTS subscribers (
   status VARCHAR(20) NOT NULL DEFAULT 'pending',
   confirmation_token UUID,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-  confirmed_at TIMESTAMP WITH TIME ZONE
+  confirmed_at TIMESTAMP WITH TIME ZONE,
+  subscribed_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  is_active BOOLEAN DEFAULT TRUE
 );
 
 -- Create indexes for better performance
@@ -46,4 +48,36 @@ BEGIN
   GET DIAGNOSTICS deleted_count = ROW_COUNT;
   RETURN deleted_count;
 END;
-$$ LANGUAGE plpgsql; 
+$$ LANGUAGE plpgsql;
+
+-- Newsletter subscribers table
+CREATE TABLE IF NOT EXISTS subscribers (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  email VARCHAR(255) UNIQUE NOT NULL,
+  subscribed_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  is_active BOOLEAN DEFAULT TRUE
+);
+
+-- Blog views table
+CREATE TABLE IF NOT EXISTS blog_views (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  slug VARCHAR(255) NOT NULL,
+  views INTEGER DEFAULT 1,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  UNIQUE(slug)
+);
+
+-- Enable row level security
+ALTER TABLE subscribers ENABLE ROW LEVEL SECURITY;
+ALTER TABLE blog_views ENABLE ROW LEVEL SECURITY;
+
+-- Create policies for subscribers (read-only for anonymous users)
+CREATE POLICY "Enable read access for all users" ON subscribers FOR SELECT USING (true);
+CREATE POLICY "Enable insert for all users" ON subscribers FOR INSERT WITH CHECK (true);
+CREATE POLICY "Enable update for all users" ON subscribers FOR UPDATE USING (true);
+
+-- Create policies for blog views (read-only for anonymous users, insert/update for service)
+CREATE POLICY "Enable read access for all users" ON blog_views FOR SELECT USING (true);
+CREATE POLICY "Enable insert for all users" ON blog_views FOR INSERT WITH CHECK (true);
+CREATE POLICY "Enable update for all users" ON blog_views FOR UPDATE USING (true); 

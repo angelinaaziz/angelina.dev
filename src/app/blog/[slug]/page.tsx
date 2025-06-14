@@ -4,6 +4,7 @@ import path from 'path';
 import matter from 'gray-matter';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import NewsletterInline from '@/components/NewsletterInline';
+import ViewCounter from '@/components/ViewCounter';
 import type { Metadata } from 'next';
 
 // Define types
@@ -278,6 +279,8 @@ export default async function BlogPostPage({ params }: Props) {
                 <span className="mr-2">✍️</span>
                 Angelina Aziz
               </span>
+              <span className="text-purple-300 hidden sm:inline">•</span>
+              <ViewCounter slug={slug} />
             </div>
           </div>
         </div>
