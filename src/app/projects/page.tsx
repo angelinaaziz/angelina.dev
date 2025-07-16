@@ -25,6 +25,25 @@ export default function Projects() {
       ]
     },
     {
+      title: "Zabaan.xyz",
+      description: "A modern Urdu learning app designed for diaspora kids who want to connect with their roots without the cringe. Features a beautiful single-card interface with swipeable navigation, AI-powered audio pronunciation, and Gen Z translations that make learning Urdu fun and relatable.",
+      tech: ["Next.js 14", "TypeScript", "Material-UI", "Framer Motion", "Eleven Labs API", "PWA"],
+      link: "https://zabaan.xyz",
+      codeStatus: "Private Repository",
+      emoji: "💜",
+      status: "Live Demo Available",
+      images: [
+        "/images/zabaan/screenshot-1.png"
+      ],
+      achievements: [
+        "Beautiful single-card interface with touch-native swipe gestures",
+        "AI-powered audio pronunciation using Eleven Labs",
+        "Multiple themed decks (emotions, family, aesthetics) with Gen Z translations",
+        "Progressive Web App (PWA) for native mobile experience",
+        "Local storage for saving favorite words offline"
+      ]
+    },
+    {
       title: "Becoming: Your Journey, Your NFT",
       description: "A decentralised application that transforms personal growth into a visual journey through soul-bound NFTs that evolve as you achieve milestones. Becoming NFTs are non-transferable, visually evolve, and create a permanent, verifiable record of your achievements. Built with React, TailwindCSS, Framer Motion, and ink! smart contracts on Polkadot.",
       tech: ["React", "TailwindCSS", "Framer Motion", "ink!", "Rust", "Polkadot"],
@@ -63,8 +82,8 @@ export default function Projects() {
       <section className="relative py-16 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-dots bg-dots opacity-50"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-purple-50/30 to-white"></div>
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="text-center mb-8">
             <div className="mb-6 inline-block">
               <div className="px-4 py-2 rounded-full bg-purple-100 text-purple-600 text-sm font-medium">
@@ -76,11 +95,11 @@ export default function Projects() {
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-600 via-accent-pink to-accent-peach animate-gradient bg-size-200">
                 Projects & Builds
               </span>
-            </h1>
+        </h1>
             
             <p className="text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
-              I just like building cool stuff that actually helps people. Here's some of the things I've made that I'm pretty proud of!
-            </p>
+          I just like building cool stuff that actually helps people. Here's some of the things I've made that I'm pretty proud of!
+        </p>
           </div>
         </div>
       </section>
@@ -171,7 +190,7 @@ export default function Projects() {
                           </>
                         ) : (
                           <>
-                            Visit Project <span className="ml-2">→</span>
+                        Visit Project <span className="ml-2">→</span>
                           </>
                         )}
                       </a>
@@ -197,7 +216,7 @@ export default function Projects() {
             </div>
           ))}
         </div>
-        </div>
+      </div>
       </main>
     </div>
   )

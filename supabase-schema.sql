@@ -48,7 +48,7 @@ BEGIN
   GET DIAGNOSTICS deleted_count = ROW_COUNT;
   RETURN deleted_count;
 END;
-$$ LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql; 
 
 -- Newsletter subscribers table
 CREATE TABLE IF NOT EXISTS subscribers (

@@ -7,8 +7,8 @@ export default function Resume() {
       <section className="relative py-16 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-dots bg-dots opacity-50"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-purple-50/30 to-white"></div>
-        
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="text-center mb-8">
             <div className="mb-6 inline-block">
               <div className="px-4 py-2 rounded-full bg-purple-100 text-purple-600 text-sm font-medium">
@@ -201,8 +201,8 @@ export default function Resume() {
               <span className="inline-block group-hover:translate-x-1 transition-transform duration-300">📄</span>
             </a>
           </div>
-          </div>
         </div>
+      </div>
       </main>
     </div>
   )

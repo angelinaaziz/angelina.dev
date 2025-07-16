@@ -61,14 +61,14 @@ async function getBlogPosts(): Promise<BlogPost[]> {
 export default async function BlogIndex() {
   const posts = await getBlogPosts();
 
-      return (
-      <div className="min-h-screen bg-white">
+  return (
+    <div className="min-h-screen bg-white">
         {/* Unsubscribe Message */}
         <Suspense fallback={null}>
           <UnsubscribeMessage />
         </Suspense>
         
-        {/* Hero Section */}
+      {/* Hero Section */}
       <section className="relative py-16 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-dots bg-dots opacity-50"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-purple-50/30 to-white"></div>
