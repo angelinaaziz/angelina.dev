@@ -1,38 +1,35 @@
 // Using built-in fetch (Node 18+)
 
 const newsletterContent = {
-  subject: "What if my surname wasn't Aziz? 🤔",
+  subject: "How we 5x'd revenue with micro-influencers 📈",
   content: `
     <div style="background: #fef7ff; border-radius: 12px; padding: 20px; margin-bottom: 16px; border-left: 4px solid #8b5cf6;">
-      <p style="margin: 0; font-size: 16px; font-weight: 600; color: #7c3aed;">Quick question...</p>
+      <p style="margin: 0; font-size: 16px; font-weight: 600; color: #7c3aed;">New blog post is live!</p>
     </div>
     
-    <p><strong>Do you ever think about how different your life would be if one tiny thing had changed?</strong></p>
+    <p><strong>We just 5x'd our revenue in one month by working with TikTokers nobody's heard of.</strong></p>
     
-    <p>I just realized my entire 13-year friendship exists because of... <em>alphabetical order</em>.</p>
+    <p>Quick context: I run a company called Auralyze.ai - an AI interview prep platform. While everyone's chasing big influencers with massive followings, we went the opposite direction and found creators with 2K followers or less who had at least one viral video.</p>
     
     <div style="background: #f8fafc; border-radius: 8px; padding: 16px; margin: 16px 0; border-left: 3px solid #ec4899;">
       <p style="margin: 0; font-style: italic; color: #475569;">
-        Year 7 science class. My surname: Aziz. Hers: starts with B.<br/>
-        We got seated together purely by chance.
+        <strong>The results:</strong> 3+ million views in a month, 5x revenue growth, and our best creator gained 2K followers with 2 videos over 1 million views each.
       </p>
     </div>
     
-    <p>That random moment completely shaped who we both became. Our personalities, interests, how we handle life - everything.</p>
+    <p>The strategy is surprisingly simple (and involves a lot of doomscrolling on TikTok), but it's working way better than we expected.</p>
     
-    <p style="font-size: 18px; font-weight: 600; color: #7c3aed; margin: 20px 0;">But what if our surnames had been different? 🦋</p>
+    <p style="font-size: 18px; font-weight: 600; color: #7c3aed; margin: 20px 0;">Plus we pay them a VERY CHUNKY bonus for viral videos 💰</p>
     
-    <p>We'd probably be completely different people. And that's both terrifying and beautiful.</p>
-    
-    <p>I wrote about these butterfly effect moments because I think we all have them - we just don't think about them enough.</p>
+    <p>I break down our entire process - from finding creators to payment structure to what content actually converts.</p>
     
     <div style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border-radius: 8px; padding: 12px; margin: 16px 0; text-align: center;">
       <p style="margin: 0; font-weight: 500; color: #92400e;">
-        💭 What random moment completely changed your life?
+        📱 Perfect timing for anyone looking to scale their content strategy
       </p>
     </div>
   `,
-  blogUrl: "https://angelina.dev/blog/the-butterfly-effect-of-alphabetical-seating",
+  blogUrl: "https://angelina.dev/blog/how-we-5xd-revenue-with-micro-influencers",
   testEmail: "angelinaaziz1@gmail.com"
 };
 
