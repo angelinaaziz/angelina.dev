@@ -9,7 +9,7 @@ const newsletterContent = {
     
     <p>This one's personal.</p>
   `,
-  blogUrl: "https://angelina.dev/blog/171-days-into-24",
+  blogUrl: "https://angelina.dev/blog/default-mode-was-killing-me",
   testEmail: "angelinaaziz1@gmail.com"
 };
 
