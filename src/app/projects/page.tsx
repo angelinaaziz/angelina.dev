@@ -7,7 +7,7 @@ export default function Projects() {
   const projects = [
     {
       title: "Auralyze.ai",
-      description: "An advanced interview preparation platform with 3000+ users that leverages multiple AI models to provide comprehensive feedback on interview performance. Now focused on the general job market, helping professionals across industries improve their interview skills.",
+      description: "An advanced interview preparation platform with 10,000+ users that leverages multiple AI models to provide comprehensive feedback on interview performance. Now focused on the general job market, helping professionals across industries improve their interview skills.",
       tech: ["React", "Node.js", "MongoDB", "OpenAI APIs", "Computer Vision", "MediaPipe", "MaterialUI", "Cloudinary"],
       link: "https://www.auralyze.ai",
       codeStatus: "Private Repository",
