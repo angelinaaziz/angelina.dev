@@ -72,7 +72,7 @@ export default function Resume() {
                   <h3 className="text-xl font-bold text-purple-600 mb-2 group-hover:text-purple-500 transition-colors duration-300">
                     Senior Platform Engineer
                   </h3>
-                  <p className="text-slate-500 mb-4">V7 Labs • 12/2025 - Present</p>
+                  <p className="text-slate-500 mb-4"><a href="https://www.v7labs.com/" target="_blank" rel="noopener noreferrer" className="hover:text-purple-600 transition-colors">V7 Labs</a> • 12/2025 - Present</p>
                   <ul className="list-disc list-inside text-slate-700 mt-2 space-y-2">
                     <li>Supported and operated cross-cloud infrastructure across AWS, Azure, and GCP, ensuring reliable deployment and consistent environments.</li>
                     <li>Designed and developed CI/CD pipelines to automate build, test, and deployment workflows to improve developer productivity.</li>
@@ -85,7 +85,7 @@ export default function Resume() {
                   <h3 className="text-xl font-bold text-purple-600 mb-2 group-hover:text-purple-500 transition-colors duration-300">
                     Senior DevOps Engineer
                   </h3>
-                  <p className="text-slate-500 mb-4">Multiverse • 02/2025 - 09/2025</p>
+                  <p className="text-slate-500 mb-4"><a href="https://www.multiverse.io/" target="_blank" rel="noopener noreferrer" className="hover:text-purple-600 transition-colors">Multiverse</a> • 02/2025 - 09/2025</p>
                   <ul className="list-disc list-inside text-slate-700 mt-2 space-y-2">
                     <li>Lead on key infrastructure projects supporting Multiverse's AI, data, and software engineering apprenticeship platforms.</li>
                     <li>Architect and implement cloud solutions on AWS and Azure to power personalised learning experiences for professional apprenticeships.</li>
@@ -99,7 +99,7 @@ export default function Resume() {
                   <h3 className="text-xl font-bold text-purple-600 mb-2 group-hover:text-purple-500 transition-colors duration-300">
                     Senior Platform Engineer
                   </h3>
-                  <p className="text-slate-500 mb-4">Legal & General • 10/2023 - 01/2025</p>
+                  <p className="text-slate-500 mb-4"><a href="https://www.legalandgeneral.com/" target="_blank" rel="noopener noreferrer" className="hover:text-purple-600 transition-colors">Legal & General</a> • 10/2023 - 01/2025</p>
                   <ul className="list-disc list-inside text-slate-700 mt-2 space-y-2">
                     <li>Automated infrastructure provisioning using Terraform, reducing manual overhead and deployment inconsistencies.</li>
                     <li>Implemented observability solutions (Prometheus, Splunk) to enhance system monitoring and alerting.</li>
@@ -113,7 +113,7 @@ export default function Resume() {
                   <h3 className="text-xl font-bold text-purple-600 mb-2 group-hover:text-purple-500 transition-colors duration-300">
                     Platform Engineer
                   </h3>
-                  <p className="text-slate-500 mb-4">Anaplan • 10/2021 - 09/2023</p>
+                  <p className="text-slate-500 mb-4"><a href="https://www.anaplan.com/" target="_blank" rel="noopener noreferrer" className="hover:text-purple-600 transition-colors">Anaplan</a> • 10/2021 - 09/2023</p>
                   <ul className="list-disc list-inside text-slate-700 mt-2 space-y-2">
                     <li>Developed and maintained a sophisticated CI/CD pipeline using Jenkins, accelerating project deployment and increasing code base stability.</li>
                     <li>Migrated existing data from company-owned DCs to cloud spokes in AWS and GCP, ensuring data integrity and accessibility, and reducing operational costs.</li>
@@ -126,7 +126,7 @@ export default function Resume() {
                   <h3 className="text-xl font-bold text-purple-600 mb-2 group-hover:text-purple-500 transition-colors duration-300">
                     Apprentice Software Engineer
                   </h3>
-                  <p className="text-slate-500 mb-4">Bank of New York Mellon • 02/2020 - 10/2021</p>
+                  <p className="text-slate-500 mb-4"><a href="https://www.bnymellon.com/" target="_blank" rel="noopener noreferrer" className="hover:text-purple-600 transition-colors">Bank of New York Mellon</a> • 02/2020 - 10/2021</p>
                   <ul className="list-disc list-inside text-slate-700 mt-2 space-y-2">
                     <li>Delivered production-ready software via automated testing, cloud deployments, and improved production observability.</li>
                   </ul>
@@ -144,7 +144,7 @@ export default function Resume() {
                 <h3 className="text-xl font-bold text-purple-600 mb-2 group-hover:text-purple-500 transition-colors duration-300">
                   Auralyze.ai
                 </h3>
-                <p className="text-slate-500 mb-2">Instant university interview feedback using AI</p>
+                <p className="text-slate-500 mb-2"><a href="https://www.auralyze.ai/" target="_blank" rel="noopener noreferrer" className="hover:text-purple-600 transition-colors">Instant university interview feedback using AI</a></p>
                 <ul className="list-disc list-inside text-slate-700 mt-2 space-y-2">
                   <li>Co-founded and grew a university admissions co-pilot platform to help students get into medical and dental school.</li>
                   <li>Raised $120,000 in funding from Techstars Atlanta.</li>
