@@ -42,9 +42,6 @@ export default function Resume() {
               <a href="https://twitter.com/angelinxaziz" target="_blank" rel="noopener noreferrer" className="hover:text-purple-600 transition-colors hover:-translate-y-1 transition-transform duration-300 inline-flex">
                 <span className="mr-2">🐦</span> Twitter
               </a>
-              <a href="tel:07595470805" className="hover:text-purple-600 transition-colors hover:-translate-y-1 transition-transform duration-300 inline-flex">
-                <span className="mr-2">📱</span> 07595470805
-              </a>
             </div>
           </div>
 
